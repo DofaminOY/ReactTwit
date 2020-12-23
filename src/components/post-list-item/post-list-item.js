@@ -3,7 +3,7 @@ import './post-list-item.css';
   
 const PostListItem = () => {
     return (
-        <li classNames = 'app-list-item d-flex justify-content-between'>
+        <div classNames = 'app-list-item d-flex justify-content-between'>
             <span className = "app-list-item-label">
                 Hello World!
             </span>
@@ -16,7 +16,7 @@ const PostListItem = () => {
                </button>
                <i className = "fa fa-heart"></i>
             </div>
-        </li>
+        </div>
     )
 }
 export default PostListItem;

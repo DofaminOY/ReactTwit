@@ -5,11 +5,11 @@ import './post-list.css';
 const PostList = () => {
     
     return (
-        <li  className="list-group-item">
+        <div  className="list-group-item">
         <PostListItem />
         <PostListItem />
         <PostListItem />
-        </li>
+        </div>
     )
     
     
