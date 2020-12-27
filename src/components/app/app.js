@@ -56,34 +56,58 @@ export default class App extends Component {
             }
         })
     }
+   
+    // onToggleLiked(id) {
+    //     this.setState(({data}) => {
+    //         const index = data.findIndex(elem => elem.id === id);
 
-    onToggleImportant(id) {
+    //         const old = data[index];
+    //         const newItem =  {...old, important: !old.important};
+
+    //         const newArr = [...data.slice(0, index), newItem, ...data.slice(index + 1)];
+    //         return {
+    //             data: newArr
+    //         }
+    //     }); 
+    // }
+      
+    // onToggleImportant(id) {
+    //     this.setState(({data}) => {
+    //         const index = data.findIndex(elem => elem.id === id);
+
+    //         const old = data[index];
+    //         const newItem =  {...old, like: !old.like};
+
+    //         const newArr = [...data.slice(0, index), newItem, ...data.slice(index + 1)];
+    //         return {
+    //             data: newArr
+    //         }
+    //     }); 
+    // }
+
+    commonToggle = ({id, isImportant = false, isLike = false}) => {
         this.setState(({data}) => {
-            const index = data.findIndex(elem => elem.id === id);
-
-            const old = data[index];
-            const newItem = {...old, important: !old.important};
-
-            const newArr = [...data.slice(0, index), newItem, ...data.slice(index + 1)];
-            return {
-                data: newArr
-            }
-        }); 
-    }
-
-    onToggleLiked(id) {
-        this.setState(({data}) => {
-            const index = data.findIndex(elem => elem.id === id);
-
-            const old = data[index];
-            const newItem = {...old, like: !old.like};
-
-            const newArr = [...data.slice(0, index), newItem, ...data.slice(index + 1)];
-            return {
-                data: newArr
-            }
-        }); 
-    }
+        const index = data.findIndex(elem => elem.id === id);
+        const old = data[index];
+        const newItem = {...old};
+        if (isImportant) {
+         newItem.important = !old.important;
+        }
+        if (isLike) {
+         newItem.like = !old.like;
+        }
+        const newArr = [...data.slice(0, index), newItem, ...data.slice(index + 1)];
+        return {
+         data: newArr
+        }
+        });
+        }
+        onToggleImportant = id => {
+        this.commonToggle({id: id, isImportant: true});
+        }
+        onToggleLiked = id => {
+        this.commonToggle({id: id, isLike: true})
+        }
 
     searchPost(items, term) {
         if (term.length === 0) {
@@ -94,6 +118,8 @@ export default class App extends Component {
             return item.label.indexOf(term) > -1
         });
     }
+
+  
 
     filterPost(items, filter) {
         if (filter === 'like') {
